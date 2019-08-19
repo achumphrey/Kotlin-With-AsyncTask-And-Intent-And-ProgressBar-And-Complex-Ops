@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     intent = Intent(this, FileSizeInBytes::class.java)
                 }
 
+                R.id.btn_random_factorial->{
+                    intent = Intent(this, RandomNumberFactorial::class.java)
+                }
+
             }//END WHEN
 
             intent!!.putExtra(Constants.URL_INTENT, url)
@@ -49,5 +53,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btn_Wake_a_sleeping_operation.setOnClickListener(this)
         btn_get_file_content.setOnClickListener(this)
         btn_get_file_size.setOnClickListener(this)
+        btn_random_factorial.setOnClickListener(this)
     }
 }

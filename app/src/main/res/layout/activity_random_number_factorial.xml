@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".FileSizeInBytes">
+        tools:context=".RandomNumberFactorial">
 
 
     <ProgressBar android:layout_width="wrap_content"
@@ -21,9 +21,8 @@
                  app:layout_constraintTop_toBottomOf="@+id/tv_display"
                  android:layout_marginTop="100dp"/>
 
-
     <TextView
-            android:text="File Size In Bytes Activity"
+            android:text="Ramdon Number Factorial Activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -41,14 +40,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_display"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
             app:layout_constraintTop_toBottomOf="@id/tv_header"
             android:layout_marginTop="32dp"/>
+
 
 
 

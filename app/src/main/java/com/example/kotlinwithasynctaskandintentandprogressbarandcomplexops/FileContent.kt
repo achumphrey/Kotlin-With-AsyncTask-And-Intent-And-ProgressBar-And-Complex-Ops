@@ -6,6 +6,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import kotlinx.android.synthetic.main.activity_file_content.*
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -21,16 +22,16 @@ class FileContent : AppCompatActivity() {
 
         Log.i("FileContent", url)
 
-        var downloadFile : DownloadWebPage = DownloadWebPage()
-        var fileBody : String? = downloadFile.execute(url).get()
+        var fileBody  = DownloadWebPage().execute(url)
 
-        tv_display?.text = fileBody
+
     }
 
-    private class DownloadWebPage : AsyncTask<String, Void, String>() {
+    inner class DownloadWebPage : AsyncTask<String, Void, String>() {
 
         override fun onPreExecute() {
             super.onPreExecute()
+            prg_bar.visibility = View.VISIBLE
         }
 
         override fun doInBackground(vararg urls: String?): String {
@@ -55,11 +56,14 @@ class FileContent : AppCompatActivity() {
 
             } catch (e: Exception) {
                 return  e.printStackTrace().toString()
-
             }
-
         }
 
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            prg_bar.visibility = View.GONE
+            tv_display?.text = result.toString()
+        }
 
     }//END CLASS
 

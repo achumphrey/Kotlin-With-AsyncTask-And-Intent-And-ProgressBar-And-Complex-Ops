@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_file_content.*
+import kotlinx.android.synthetic.main.activity_file_size_in_bytes.*
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
@@ -23,18 +23,16 @@ class FileSizeInBytes : AppCompatActivity() {
 
         Log.i("FileSizeInBytes", url)
 
-        var getFile : FileSizeAsync = FileSizeAsync()
-        var fileSize : Int? = getFile.execute(url).get()
-
-        tv_display?.text = fileSize.toString()
+        var getFile = FileSizeAsync().execute(url) // do not require the get method here
     }
 
-
-    class FileSizeAsync : AsyncTask<String, Void, Int>() {
+    //make this an inner class so you can access the class context
+    inner class FileSizeAsync : AsyncTask<String, Void, Int>() {
 
         override fun onPreExecute() {
             super.onPreExecute()
-
+            prg_bar.visibility = View.VISIBLE //make the progress bar visible
+                                            //while asynctask code runs
         }
 
         override fun doInBackground(vararg urls: String?): Int? {
@@ -64,14 +62,11 @@ class FileSizeInBytes : AppCompatActivity() {
             }
         }
 
-        override fun onProgressUpdate(vararg values: Void?) {
-            super.onProgressUpdate(*values)
-
-        }
-
         override fun onPostExecute(fileSize: Int) {
             super.onPostExecute(fileSize)
-
+            prg_bar.visibility = View.GONE //progress bar to disappear once
+                                            //asynctask is finished running
+            tv_display?.text = "$fileSize Bytes"
         }
     }
 }
